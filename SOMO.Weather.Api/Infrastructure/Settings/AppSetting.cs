@@ -4,5 +4,6 @@
     {
         public string WeatherApiUrl { get; set; }
         public string ApiKey { get; set; }
+        public string ServiceBusConnectionString { get; set; }
     }
 }

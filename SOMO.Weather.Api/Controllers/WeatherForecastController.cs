@@ -17,9 +17,9 @@ namespace SOMO.Weather.Api.Controllers
 
         [HttpGet]
         [Route("cities/{cityName}")]
-        public async Task<ActionResult> GetAllWeatherForecast(string cityName)
+        public async Task<ActionResult> GetWeatherForecast(string cityName)
         {
-            // Errors are not being handled, I am assuming all operations are successful
+            // Errors are not being handled, I am assuming all operations was successful
             var response = await this._weatherService.GetCurrentWeatherByCityName(cityName);
             return Ok(response);
         }

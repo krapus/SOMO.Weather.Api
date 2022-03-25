@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace SOMO.Weather.Api.Application.GetWeather.EventHandler.Interface
 {
-    public interface IRainyDayEventHandler
+    public interface IGetWeatherEventHandler
     {
-        Task Handle(ResponseWeatherApi responseWeatherApi);
+        Task Handle(ResponseWeatherApi weatherApiResponse);
     }
 }

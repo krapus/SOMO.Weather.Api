@@ -8,6 +8,8 @@ using SOMO.Weather.Api.Application.GetWeather.EventHandler.Implementation;
 using SOMO.Weather.Api.Application.GetWeather.EventHandler.Interface;
 using SOMO.Weather.Api.Application.GetWeather.Queries.Implementation;
 using SOMO.Weather.Api.Application.GetWeather.Queries.Interfaces;
+using SOMO.Weather.Api.Infrastructure.EventsHandler.Implementation;
+using SOMO.Weather.Api.Infrastructure.EventsHandler.Interface;
 using SOMO.Weather.Api.Infrastructure.ExternalApi.Implementation;
 using SOMO.Weather.Api.Infrastructure.ExternalApi.Interface;
 using SOMO.Weather.Api.Infrastructure.Settings;
@@ -31,10 +33,12 @@ namespace SOMO.Weather.Api
 
             // Infrastructure Dependecies
             services.AddSingleton<IWeatherApiClient, WeatherApiClient>();
+            services.AddSingleton<ISenderMessage, SenderMessage>();
 
             // Application Dependecies
             services.AddScoped<IWeatherService, WeatherService>();
             services.AddScoped<IRainyDayEventHandler, RainyDayEventHandler>();
+            services.AddScoped<IGetWeatherEventHandler, GetWeatherEventHandler>();
 
             services.AddControllers();
 
