@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using SOMO.Weather.Api.Application.GetWeather.Queries.Interfaces;
 using System.Threading.Tasks;
 
 namespace SOMO.Weather.Api.Controllers
@@ -11,29 +8,20 @@ namespace SOMO.Weather.Api.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly IWeatherService _weatherService;
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(IWeatherService weatherService)
         {
-            _logger = logger;
+            this._weatherService = weatherService;
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        [Route("cities/{cityName}")]
+        public async Task<ActionResult> GetAllWeatherForecast(string cityName)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            // Errors are not being handled, I am assuming all operations are successful
+            var response = await this._weatherService.GetCurrentWeatherByCityName(cityName);
+            return Ok(response);
         }
     }
 }

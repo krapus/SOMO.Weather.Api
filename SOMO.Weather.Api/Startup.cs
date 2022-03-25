@@ -1,16 +1,16 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using SOMO.Weather.Api.Application.GetWeather.EventHandler.Implementation;
+using SOMO.Weather.Api.Application.GetWeather.EventHandler.Interface;
+using SOMO.Weather.Api.Application.GetWeather.Queries.Implementation;
+using SOMO.Weather.Api.Application.GetWeather.Queries.Interfaces;
+using SOMO.Weather.Api.Infrastructure.ExternalApi.Implementation;
+using SOMO.Weather.Api.Infrastructure.ExternalApi.Interface;
+using SOMO.Weather.Api.Infrastructure.Settings;
 
 namespace SOMO.Weather.Api
 {
@@ -26,6 +26,16 @@ namespace SOMO.Weather.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<AppSetting>(Configuration.GetSection("AppSetting"));
+            services.AddOptions();
+
+            // Infrastructure Dependecies
+            services.AddSingleton<IWeatherApiClient, WeatherApiClient>();
+
+            // Application Dependecies
+            services.AddScoped<IWeatherService, WeatherService>();
+            services.AddScoped<IRainyDayEventHandler, RainyDayEventHandler>();
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
