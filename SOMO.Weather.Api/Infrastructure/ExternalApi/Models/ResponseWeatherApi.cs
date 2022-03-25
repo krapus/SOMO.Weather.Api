@@ -2,7 +2,7 @@
 
 namespace SOMO.Weather.Api.Infrastructure.ExternalApi.Models
 {
-    public class ResponseWeatherApi
+    public class ResponseWeatherApi: BaseError
     {
         [JsonProperty("location")]
         public Location Location { get; set; }
@@ -51,5 +51,10 @@ namespace SOMO.Weather.Api.Infrastructure.ExternalApi.Models
     {
         [JsonProperty("condition")]
         public Condition Condition { get; set; }
+    }
+
+    public class BaseError
+    {
+        public bool IsSuccessful { get; set; }
     }
 }
