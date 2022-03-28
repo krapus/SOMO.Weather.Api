@@ -4,6 +4,9 @@ namespace SOMO.Weather.Api.Application.GetWeather.EventHandler.Models
 {
     public class GetWeatherMessage
     {
+        [JsonProperty("location")]
+        public string Location { get; set; }
+
         [JsonProperty("text")]
         public string Text { get; set; }
 

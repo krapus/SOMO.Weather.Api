@@ -31,7 +31,8 @@ namespace SOMO.Weather.Api.Application.GetWeather.Queries.Implementation
                 {
                     Code = weatherApiResponse.Current.Condition.Code,
                     Icon = weatherApiResponse.Current.Condition.Icon,
-                    Text = weatherApiResponse.Current.Condition.Text
+                    Text = weatherApiResponse.Current.Condition.Text,
+                    Location = weatherApiResponse.Location.Name
                 });
 
                 // Possibles codes for rainy days
@@ -41,6 +42,7 @@ namespace SOMO.Weather.Api.Application.GetWeather.Queries.Implementation
                     1003,
                     1189,
                     1180
+
                 };
 
                 // This condition code should be out of the code
@@ -50,10 +52,11 @@ namespace SOMO.Weather.Api.Application.GetWeather.Queries.Implementation
                     // Probably this need to be review it the **await process**, we can handle in a direrente way
                     // it depends if we want to wait for an answer or what about if any error happend
                     await this._rainyDayEventHandler.Handle(new EventHandler.Models.RainyDayMessage()
-                    { 
-                        Code = "( ͡°ʖ̯ ͡°)", 
-                        Message = "It doesn't seem like a nice day to be outside, make coffee and keep coding" }
-                    );
+                    {
+                        Location = weatherApiResponse.Location.Name,
+                        Code = "( ͡°ʖ̯ ͡°)",
+                        Message = "It doesn't seem like a nice day to be outside, make coffee and keep coding"
+                    });
                 }
 
                 weatherApiResponse.IsSuccessful = true;
