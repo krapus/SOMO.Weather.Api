@@ -22,7 +22,7 @@ namespace SOMO.Weather.Api.Controllers
         {
             // Errors are not being handled, I am assuming all operations was successful
             var response = await this._weatherService.GetCurrentWeatherByCityName(cityName);
-            if( response.IsSuccessful)
+            if (response.IsSuccessful)
             {
                 return StatusCode(StatusCodes.Status200OK, response);
             }

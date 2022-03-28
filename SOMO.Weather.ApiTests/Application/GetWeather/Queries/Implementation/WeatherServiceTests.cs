@@ -1,13 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using SOMO.Weather.Api.Application.GetWeather.EventHandler.Interface;
-using SOMO.Weather.Api.Application.GetWeather.Queries.Implementation;
 using SOMO.Weather.Api.Application.GetWeather.Queries.Interfaces;
 using SOMO.Weather.Api.Infrastructure.ExternalApi.Interface;
 using SOMO.Weather.Api.Infrastructure.ExternalApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SOMO.Weather.Api.Application.GetWeather.Queries.Implementation.Tests

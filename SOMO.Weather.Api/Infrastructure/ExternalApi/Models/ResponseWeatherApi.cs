@@ -2,7 +2,7 @@
 
 namespace SOMO.Weather.Api.Infrastructure.ExternalApi.Models
 {
-    public class ResponseWeatherApi: BaseError
+    public class ResponseWeatherApi : BaseError
     {
         [JsonProperty("location")]
         public Location Location { get; set; }

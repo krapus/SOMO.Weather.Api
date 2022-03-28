@@ -18,7 +18,7 @@ namespace SOMO.Weather.Api.Infrastructure.EventsHandler.Implementation
 
         async Task ISenderMessage.Send(string queueName, string data)
         {
-            var sender = this._serviceBusClient.CreateSender(queueName);            
+            var sender = this._serviceBusClient.CreateSender(queueName);
             var message = new ServiceBusMessage(data);
             await sender.SendMessageAsync(message);
         }
